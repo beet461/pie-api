@@ -29,16 +29,6 @@ func test(w http.ResponseWriter, r *http.Request) {
 	insert(db, "test", values)
 }
 
-func randomKey() string {
-	var key []string
-
-	for i := 0; i < 51; i++ {
-		key = append(key, letters[rand.Intn(len(letters))])
-	}
-
-	return strings.Join(key, "")
-}
-
 func errorCheck(err error) {
 	if err != nil {
 		fmt.Println("ERROR CHECK:", err)
@@ -49,10 +39,6 @@ func respond(w http.ResponseWriter, v ...interface{}) {
 	enc, err := json.Marshal(v)
 	errorCheck(err)
 	w.Write([]byte(enc))
-}
-
-func customise(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 }
 
 func main() {

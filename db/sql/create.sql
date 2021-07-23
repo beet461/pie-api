@@ -1,13 +1,9 @@
-CREATE TABLE test (
-    TestValue string
-);
-
+CREATE TABLE test (TestValue string);
 CREATE TABLE signin_data (
     Emails string,
     Passwords string,
     Id string
 );
-
 CREATE TABLE colors (
     Account string,
     EmailMenu string,
@@ -16,4 +12,13 @@ CREATE TABLE colors (
     BottomNavBarBack string,
     BottomNavBarSelected string,
     BottomNavBarUnselected string
+);
+CREATE TABLE font (
+    Account string,
+    HeaderSize int,
+    HeaderFont string,
+    GeneralTextSize int,
+    GeneralFont string,
+    EmailPreviewTitleSize string,
+    EmailPreviewTitleFont string
 );

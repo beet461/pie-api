@@ -1,15 +1,47 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
+	"strings"
 )
+
+// randomKey() generates a random key of length 50 and returns it if the key does not already exist within the db
+func randomKey(db *sql.DB) string {
+	var key []string
+
+	for i := 0; i < 51; i++ {
+		key = append(key, letters[rand.Intn(len(letters))])
+	}
+	rKey := strings.Join(key, "")
+
+	var (
+		email    string
+		password string
+		id       string
+	)
+
+	ids, err := db.Query(fmt.Sprintf("SELECT * FROM signin_data WHERE Id IN ('%v')", rKey))
+	errorCheck(err)
+
+	for ids.Next() {
+		ids.Scan(&email, &password, &id)
+		if id == rKey {
+			return randomKey(db)
+		} else {
+			return rKey
+		}
+	}
+	return ""
+}
 
 // If the account exists "ael" is sent back (account exists login)
 // If it does not "ade" is sent back (account doesn't exist)
-func login(w http.ResponseWriter, r *http.Request, signin SignIn) {
+func login(w http.ResponseWriter, signin SignIn) {
 	db := openDB()
 
 	var (
@@ -47,7 +79,7 @@ func login(w http.ResponseWriter, r *http.Request, signin SignIn) {
 	}
 }
 
-func register(w http.ResponseWriter, r *http.Request, signin SignIn) {
+func register(w http.ResponseWriter, signin SignIn) {
 	values := []string{signin.Email, signin.Password, signin.Id}
 	db := openDB()
 
@@ -80,8 +112,9 @@ func register(w http.ResponseWriter, r *http.Request, signin SignIn) {
 
 	// If there is no match, the email, password and id are inserted into the db
 	if !match {
-		values[2] = randomKey()
+		values[2] = randomKey(db)
 		insert(db, "signin_data", values)
+		createNew(db)
 	}
 }
 
@@ -96,8 +129,8 @@ func signin(w http.ResponseWriter, r *http.Request) {
 	errorCheck(jerr)
 
 	if signin.Type == "login" {
-		login(w, r, signin)
+		login(w, signin)
 	} else if signin.Type == "register" {
-		register(w, r, signin)
+		register(w, signin)
 	}
 }
