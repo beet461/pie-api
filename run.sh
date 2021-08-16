@@ -1,1 +1,3 @@
- go build -o ./build/pie-api.exe && ./build/pie-api.exe
+cat todos
+
+go build -o ./pie.api ./src && ./pie.api
