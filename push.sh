@@ -1,6 +1,13 @@
 echo NOTE: ADD CHANGES TO README.MD
 
-sleep 3
+echo 3
+sleep 1
+
+echo 2
+sleep 1
+
+echo 1
+sleep 1
 
 git add .
 
