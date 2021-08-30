@@ -23,11 +23,11 @@ func sqlList(v []string) string {
 
 // insert() takes the table and array of values to be inserted and runs the INSERT command
 func insert(db *sql.DB, table string, values []string) {
-	stmt, err := db.Prepare(fmt.Sprintf("INSERT INTO %v VALUES (%v)", table, sqlList(values)))
+	stmt, err := db.Prepare("INSERT INTO ? VALUES ('?')")
 	defer stmt.Close()
 
 	errorCheck(err, "INSERT")
-	stmt.Exec()
+	stmt.Exec(table, sqlList(values))
 }
 
 // Returns *sql.DB, which is an instance of the pie-db in memory

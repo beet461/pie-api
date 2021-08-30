@@ -26,9 +26,9 @@ func respond(w http.ResponseWriter, v ...interface{}) {
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
+
 	router := mux.NewRouter().PathPrefix("/api").Subrouter()
 
-	router.HandleFunc("/customise", customise).Methods("POST")
 	router.HandleFunc("/signin", signin).Methods("POST")
 
 	fmt.Println("Listening and Serving on port :8081")

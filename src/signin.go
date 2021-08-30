@@ -43,7 +43,7 @@ func register(w http.ResponseWriter, signin SignIn) {
 	db := openDB()
 
 	// This sql statement selects rows from the db where the Email column has a value matching the email entered by the client
-	rows, err := db.Query("SELECT * FROM signin_data WHERE Emails IN ('?')", signin.Email)
+	rows, err := db.Query("SELECT * FROM signin_data WHERE Emails IN (?)", signin.Email)
 	errorCheck(err, "QUERY")
 	defer rows.Close()
 
@@ -58,7 +58,7 @@ func register(w http.ResponseWriter, signin SignIn) {
 	// After this srp (succeful registration proceed) is responded along with account details and customisation details
 	signin.Id = pielib.RandomKey(db)
 	insert(db, "signin_data", []string{signin.Email, signin.Password, signin.Firstname, signin.Lastname, signin.Id})
-	cust := Customise{signin.Id, "default"}
+	cust := newTheme(db, signin.Id)
 	// Password and id are set to null, so it isn't freely available on client's device
 	signin.Password = ""
 	signin.Id = ""

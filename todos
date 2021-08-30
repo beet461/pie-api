@@ -1,4 +1,3 @@
 To do:
 ~ Basic encryption for everything
-~ Use themes instead of individual color values
 ~ Possibly respond with password as well in signin endpoint, but need encryption

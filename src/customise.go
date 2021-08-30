@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"net/http"
 )
 
 func findColors(db *sql.DB, id string) Customise {
@@ -20,9 +19,9 @@ func findColors(db *sql.DB, id string) Customise {
 	return cust
 }
 
-// Responds with color scheme of user, not used by client program, only for outside queries
-func customise(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+func newTheme(db *sql.DB, id string) Customise {
+	cust := Customise{id, "default"}
+	insert(db, "customisation", []string{cust.Account, cust.Colorscheme})
 
-	//findColors()
+	return cust
 }
