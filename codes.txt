@@ -1,0 +1,14 @@
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+1 2 3 4 5 6 7 8 9 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2
+                  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6
+
+Guide:
+> Put the numerical value of each letter one after the other (not adding)
+> If total numerical digits are over 3, use all digits of first letter's num value, and the last letter of subsequent letters' num value
+> Write definition next to code
+
+115 - Account already exists
+163 - Password is wrong/incorrect
+145 - Account doesn't exist
+199 - Successful signin
+916 - Incorrect parameter 

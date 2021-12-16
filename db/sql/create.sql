@@ -7,6 +7,10 @@ CREATE TABLE signin_data (
     Id string
 );
 CREATE TABLE customisation (
-    Account string,
+    Id string,
     Colorscheme string
 );
+CREATE TABLE salts (
+    Salts string,
+    Id string
+)
