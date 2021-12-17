@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func findColourScheme(db *sql.DB, id string) Customise {
+func FindColourScheme(db *sql.DB, id string) Customise {
 	var scheme string
 
 	rows, err := db.Query(fmt.Sprintf("SELECT * FROM customisation WHERE Id='%v'", id))

@@ -41,7 +41,7 @@ func LoginAccount(w http.ResponseWriter, acc UserData) (int, Account) {
 	acc.Id = det.Id
 
 	if det.Password == hpwd {
-		return 199, Account{acc, findColourScheme(db, det.Id)}
+		return 199, Account{acc, FindColourScheme(db, det.Id)}
 	} else {
 		return 163, Account{}
 	}
