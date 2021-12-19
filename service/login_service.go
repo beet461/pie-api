@@ -38,10 +38,9 @@ func LoginAccount(w http.ResponseWriter, acc UserData) (int, Account) {
 	}
 
 	hpwd := hashString(acc.Password, getUserSalt(db, det.Id))
-	acc.Id = det.Id
 
 	if det.Password == hpwd {
-		return 199, Account{acc, FindColourScheme(db, det.Id)}
+		return 199, Account{det, FindColourScheme(db, det.Id)}
 	} else {
 		return 163, Account{}
 	}

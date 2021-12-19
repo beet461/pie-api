@@ -1,9 +1,5 @@
 package service
 
-type Test struct {
-	TestRespond string
-}
-
 type UserData struct {
 	Email     string
 	Password  string
