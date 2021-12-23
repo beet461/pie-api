@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
@@ -95,7 +94,7 @@ void req() async {
     body: payload,
   );
   AResponse obj = fetchAResponse(response.body);
-  print(obj.account.signin.fname);
+  print(obj);
 }
 
 void main() {
